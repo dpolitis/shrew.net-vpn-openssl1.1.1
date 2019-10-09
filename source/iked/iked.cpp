@@ -39,6 +39,7 @@
  *
  */
 
+#include <openssl/rand.h>
 #include "iked.h"
 
 long _IKED_EXEC::func( void * arg )
@@ -46,6 +47,10 @@ long _IKED_EXEC::func( void * arg )
 	long result = iked_func( arg );
 
 	// openssl thread cleanup
+        #if OPENSSL_API_COMPAT < 0x10000000L
+        void ERR_remove_state(unsigned long pid);
+        #endif
+
 	ERR_remove_state( 0 );
 
 	return result;
@@ -53,7 +58,7 @@ long _IKED_EXEC::func( void * arg )
 
 bool _IKED::rand_bytes( void * buff, long size )
 {
-	RAND_pseudo_bytes( ( unsigned char * ) buff, size );
+	RAND_bytes( ( unsigned char * ) buff, size );
 	return true;
 }
 
