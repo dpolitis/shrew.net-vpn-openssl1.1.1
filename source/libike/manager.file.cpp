@@ -203,8 +203,8 @@ bool _CONFIG_MANAGER::file_vpn_load( CONFIG & config, const char * path, bool sa
 
 	while( true )
 	{
-		char	next;
-		char	type;
+		int  	next;
+		int 	type;
 		BDATA	name;
 		BDATA	data;
 
@@ -405,7 +405,7 @@ bool _CONFIG_MANAGER::file_vpn_del( CONFIG & config )
 
 bool read_line_pcf( FILE * fp, BDATA & name, BDATA & data )
 {
-	char	next;
+	int     next;
 	BDATA	line;
 
 	name.del();
