@@ -99,7 +99,6 @@ size_t _BDATA::grow( size_t new_real )
 		if( data_buff != NULL )
 		{
 			memcpy( new_buff, data_buff, data_real );
-			delete [] data_buff;
 		}
 
 		data_buff = new_buff;
